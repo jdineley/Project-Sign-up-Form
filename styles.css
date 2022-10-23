@@ -1,0 +1,39 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+@font-face {
+    font-family: 'Norse-Bold';
+    src: url('./fonts/Norse-Bold.otf')
+}
+
+.banner-outer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    background-image: url("./images/kal-visuals-aK4iPNYipnU-unsplash.jpg");
+    background-position: 60%;
+}
+
+.banner-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    background-color: rgba(20, 20, 20, 0.3);
+
+}
+
+
+
+.banner-inner > img {
+    height: 4rem;
+}
+
+.banner-inner > div {
+    font-size: 4rem;
+    font-family: 'Norse-Bold';
+}
