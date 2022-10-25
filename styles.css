@@ -3,6 +3,11 @@
     padding: 0;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    text-transform: capitalize;
+}
+
+.container {
+    height: 100vh;
 }
 
 @font-face {
@@ -14,7 +19,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 200px;
+    height: 250px;
     background-image: url("./images/kal-visuals-aK4iPNYipnU-unsplash.jpg");
     background-position: 55%;
 }
@@ -35,36 +40,55 @@
 }
 
 .banner-inner > div {
-    font-size: 4rem;
+    font-size: 2rem;
     color: white;
     /* font-family: 'Norse-Bold'; */
 }
 
 .content {
-    width: 90%;
-    margin: 20px auto;
-    text-align: center;
+    /* width: 90%; */
+    /* margin: 20px auto;
+    text-align: center; */
 }
 
 .intro {
+    background-color: rgb(246, 246, 246);
     line-height: 1.5;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: 700;
 }
 
 .intro p:nth-child(3) {
-    margin-block: 20px;
-}
-/* .intro p:nth-child(4) {
-    margin-top: 40px;
-} */
+    margin-top: 20px;
+    text-align: center;
 
-form {
-    margin-block: 10px;
+}
+
+.form {
+    margin-top: 50px;
+}
+
+.form > p {
+    font-size: 1.5rem;
+    font-weight: 100;
+    text-align: center;
+
 }
 
 input {
-    width: 80%;
+    width: 300px;
+    padding: 7px;
 }
-.form div {
+
+.form-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+
+.form-row {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -72,10 +96,46 @@ input {
 }
 
 button {
-    width: 40%;
+    font-size: 16px;
+    font-weight: bold;
+  
+    color: #FFFFFF;
+    background-color: #5995DA;
+  
+    border: none;
+    border-radius: 3px;
+  
+    padding: 10px 40px;
+    cursor: pointer;
 }
 
-.form p {
-    font-size: 1.5rem;
-    font-weight: 100;
-}
+
+
+/* @media only screen and (min-width: 700px){
+    .container {
+        display: flex;
+
+    }
+    .banner-outer {
+        height: auto;
+        width: 40%;
+    }
+
+    .form-element {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    input {
+        width: 250px;
+        height: initial;
+    }
+    label {
+        text-align: right;
+        width: 200px;
+        margin-top: 7px;
+        padding-right: 20px;   
+    }
+    button {
+        margin-left: 200px;
+    }
+} */
