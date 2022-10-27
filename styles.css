@@ -40,9 +40,9 @@
 }
 
 .banner-inner > div {
-    font-size: 2rem;
+    font-size: 3rem;
     color: white;
-    /* font-family: 'Norse-Bold'; */
+    font-family: 'Norse-Bold';
 }
 
 .content {
@@ -85,8 +85,14 @@
 }
 
 input {
-    width: 260px;
-    padding: 7px;
+    /* width: 260px;
+    padding: 7px; */
+    /* font-family: customFontBold; */
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(224, 224, 224);
+    font-size: .9rem;
+    margin-top: 3px;
 }
 
 .form-inputs {
@@ -131,7 +137,7 @@ button {
 }
 
 .button > p {
-    margin-top: 10px;
+    margin-bottom: 30px;
 }
 
 
@@ -145,21 +151,17 @@ button {
 
     .banner-outer {
         height: 100vh;
-        /* width: auto; */
         flex: 2;
-        align-self: stretch;
+        background-size: cover;
+        /* background-repeat: no-repeat; */
     }
 
     .content {
-        height: auto;
-        /* align-self: stretch; */
+        height: 100vh;
         flex: 4;
         display: flex;
         flex-direction: column;
         justify-content: center;
-    }
-    .form {
-        /* flex-grow: 1; */
     }
 }
 
