@@ -20,35 +20,35 @@
                 <p>This is not a real online service! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus, commodi! </p>
                 <p>Sign up now to get started.</p>
                 <p>You know you want to.</p>
-                <!-- <p>Let's do this</p> -->
             </div>
             <div class="form">
                 <p>Let's do this</p>
-                <form action="#" method="post" class="form-element">
+                <form action="#" method="get" class="form-element">
                     <div class="form-inputs">
                         <div class="form-row">
                             <label for="first-name">FIRST NAME</label>
-                            <input type="text" id="first-name" name="first-name">
+                            <input type="text" id="first-name" name="first-name" placeholder="first name *" required>
                         </div>
                         <div class="form-row">
                             <label for="last-name">LAST NAME</label>
-                            <input type="text" id="last-name" name="last-name">
+                            <input type="text" id="last-name" name="last-name" placeholder="last name *" required>
                         </div>
                         <div class="form-row">
                             <label for="email">EMAIL</label>
-                            <input type="email" name="email" id="email">
+                            <input type="email" name="email" id="email" placeholder="email *" required>
+                            <div id="email-error" class="error"></div>
                         </div>
                         <div class="form-row">
                             <label for="tel">PHONE NUMBER</label>
-                            <input type="tel" name="tel" id="tel">
+                            <input type="tel" name="tel" id="tel" placeholder="Phone number *">
                         </div>
                         <div class="form-row">
                             <label for="password">PASSWORD</label>
-                            <input type="password" name="password" id="password" class="error">
+                            <input type="password" name="password" id="password" placeholder="password *" required>
                         </div>
                         <div class="form-row">
                             <label for="confirm-password">CONFIRM PASSWORD</label>
-                            <input type="password" name="confirm-password" id="confirm-password" class="error">
+                            <input type="password" name="confirm-password" id="confirm-password" placeholder="confirm password *" required>
                         </div>
                     </div>
                     <div class="button">
@@ -62,4 +62,36 @@
        <footer></footer>
     </div>
 </body>
+
+<script>
+    const email = document.querySelector('#email');
+    const emailError = document.querySelector('#email-error')
+
+    let emailEvent = ''
+
+    email.addEventListener('input', (evt) => {
+        console.log(emailEvent); 
+        if(emailEvent){
+            if(email.validity.typeMismatch){
+                emailError.textContent = 'error'
+            } else {
+                emailError.textContent = ''
+            }
+        }
+    })
+
+    email.addEventListener('focusout', (evt) => {
+        if(email.value){
+            emailEvent = evt.type;
+        } else {
+            emailEvent = '';
+        }
+        if(email.validity.typeMismatch){
+            emailError.textContent = 'error'
+        } else {
+            emailError.textContent = ''
+        }
+    })
+
+</script>
 </html>

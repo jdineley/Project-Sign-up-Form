@@ -50,6 +50,7 @@
     /* margin: 20px auto;
     text-align: center; */
     background-color: rgb(246, 246, 246);
+    /* background-color: pink; */
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -57,7 +58,7 @@
 }
 
 .intro {
-    background-color: rgb(246, 246, 246);
+    /* background-color: rgb(246, 246, 246); */
     line-height: 1.5;
     padding: 15px;
     font-size: 1.2rem;
@@ -71,7 +72,9 @@
 }
 
 .form {
-    margin-top: 50px;
+    margin-top: 30px;
+    padding-top: 20px;
+    background-color: white;
     
 }
 
@@ -80,13 +83,20 @@
 .form > p {
     font-size: 1.5rem;
     font-weight: 100;
-    text-align: center;
+    /* text-align: center; */
+    padding-left: 30px;
 
 }
 
+label {
+    display: block;
+    font-size: 0.8  rem;
+}
+
 input {
-    /* width: 260px;
-    padding: 7px; */
+    display: block;
+    width: 200px;
+    /* padding: 7px; */
     /* font-family: customFontBold; */
     padding: 5px 10px;
     border-radius: 5px;
@@ -95,20 +105,25 @@ input {
     margin-top: 3px;
 }
 
+input::placeholder {
+    opacity: 0.4;
+}
+
 .form-inputs {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     gap: 10px;
     margin-bottom: 10px;
+    padding-left: 30px;
     padding-bottom: 40px;
     box-shadow: 0px 5px 10px rgb(206, 206, 206);
 }
 
 .form-row {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    /* display: flex;
+    flex-direction: column; */
+    /* align-items: center; */
     margin-top: 15px;
 }
 
@@ -136,9 +151,31 @@ button {
     cursor: pointer;
 }
 
+.button {
+    background-color: rgb(246, 246, 246);
+    /* background-color: pink; */
+}
+
 .button > p {
     margin-bottom: 30px;
 }
+
+input:focus{
+    box-shadow: 0px 5px 5px rgb(180, 180, 180);
+}
+
+input:valid {
+    border-color: green;
+    background-color: rgba(120, 245, 120, 0.472);
+}
+
+.error {
+    font-family: customFontBold;
+    font-size: .7rem;
+    color: rgb(255, 69, 100);
+    position: absolute;
+  } 
+
 
 
 @media only screen and (min-width: 800px){
