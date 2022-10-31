@@ -176,6 +176,9 @@ input:valid {
     position: absolute;
   } 
 
+  input:invalid {
+    background-color: red;
+  }
 
 
 @media only screen and (min-width: 800px){
