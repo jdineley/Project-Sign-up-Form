@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-row">
                             <label for="tel">PHONE NUMBER</label>
-                            <input type="tel" name="tel" id="tel" placeholder="Phone number *" pattern='[0-9]{10}'>
+                            <input type="tel" name="tel" id="tel" placeholder="phone number *" pattern='[0-9]{10}'>
                         </div>
                         <div class="form-row">
                             <label for="password">PASSWORD</label>
@@ -57,6 +57,8 @@
                     </div>
                 </form>
             </div>
+            <div>hello, my name is james</div>
+            <p>hello, my name is james</p>
 
        </div> 
        <footer></footer>
@@ -64,88 +66,68 @@
 </body>
 
 <script>
-    const email = document.querySelector('#email');
-    const emailError = document.querySelector('#email-error')
-
     const inputs = document.querySelectorAll('input')
 
+    const errorMessage = {
+        email: 'example@example.com',
+        tel: 'enter a ten digit number'
+    }
 
     function patternValidation(element) {
-
-        let event = '';
-        let div = document.createElement('div');
-        
-        element.after(div)
-
-        let validityCheck
-
+        let focusout = false;
+        let p = document.createElement('p');
+        p.classList.add("error");
+        element.after(p);
+        let validityCheck;
         element.addEventListener('input', (evt) => {
-            console.log(event)
             if(element.pattern){
                 validityCheck = element.validity.patternMismatch
             } else {
                 validityCheck = element.validity.typeMismatch
             }
-            if(event){
-                if(validityCheck){
-                    div.textContent = 'error'
+            if(focusout){
+                if(validityCheck && element.value){
+                    element.classList.add("input-error")
+                    element.classList.remove("input-success")
+                    p.textContent = errorMessage[element.id];
+                } else if (element.value) {
+                    element.classList.remove("input-error")
+                    element.classList.add("input-success")
+                    p.textContent = ''
                 } else {
-                    div.textContent = ''
+                    element.classList.remove("input-error")
+                    element.classList.remove("input-success")
                 }
             }
         })
-
         element.addEventListener('focusout', (evt) => {
             if(element.value){
-                event = evt.type;
+                focusout = true;
             } else {
-                event = '';
+                focusout = false;
             }
-            if(validityCheck){
-                div.textContent = 'error'
+            if(validityCheck && element.value){
+                element.classList.add("input-error")
+                element.classList.remove("input-success")
+                p.textContent = errorMessage[element.id];
+            } else if(element.value){
+                element.classList.remove("input-error")
+                element.classList.add("input-success")
+                p.textContent = ''
             } else {
-                div.textContent = ''
+                element.classList.remove("input-error")
+                element.classList.remove("input-success")
+                p.textContent = ''
             }
-            console.log(event)
         })
     }
 
-    // inputs.forEach((e) => {
-    //     patternValidation(e)
-    // })
-
     for(let i = 0; i < inputs.length; i++){
-        console.log(inputs[i].id)
         if(inputs[i].id !== 'confirm-password'){
             patternValidation(inputs[i]);
         }
     }
 
-    // let emailEvent = ''
-
-    // email.addEventListener('input', (evt) => {
-    //     console.log(emailEvent); 
-    //     if(emailEvent){
-    //         if(email.validity.typeMismatch){
-    //             emailError.textContent = 'error'
-    //         } else {
-    //             emailError.textContent = ''
-    //         }
-    //     }
-    // })
-
-    // email.addEventListener('focusout', (evt) => {
-    //     if(email.value){
-    //         emailEvent = evt.type;
-    //     } else {
-    //         emailEvent = '';
-    //     }
-    //     if(email.validity.typeMismatch){
-    //         emailError.textContent = 'error'
-    //     } else {
-    //         emailError.textContent = ''
-    //     }
-    // })
 
 </script>
 </html>
