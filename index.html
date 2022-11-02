@@ -40,11 +40,17 @@
                         </div>
                         <div class="form-row">
                             <label for="tel">PHONE NUMBER</label>
-                            <input type="tel" name="tel" id="tel" placeholder="phone number *" pattern='[0-9]{10}'>
+                            <input type="tel" name="tel" id="tel" placeholder="phone number" pattern='[0-9]{10}'>
                         </div>
                         <div class="form-row">
                             <label for="password">PASSWORD</label>
                             <input type="password" name="password" id="password" placeholder="password *" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}' required>
+                            <div class="error error-message">
+                                <p id="num-error">must include at least one number</p>
+                                <p id="lowercase-error">must include at least one lowercase letter</p>
+                                <p id="uppercase-error">must include at least one upper letter</p>
+                                <p id="char-length-error">must include 8 character or more</p>
+                            </div>
                         </div>
                         <div class="form-row">
                             <label for="confirm-password">CONFIRM PASSWORD</label>
@@ -66,7 +72,16 @@
 </body>
 
 <script>
-    const inputs = document.querySelectorAll('input')
+    const inputs = document.querySelectorAll('input');
+    const password = document.querySelector('#password');
+    const confirmPassword = document.querySelector('#confirm-password');
+    const passwordErrorMessage = document.querySelectorAll('.error-message > *')
+
+    for(let j = 0; j < passwordErrorMessage.length; j++){
+        console.log('bar')
+        passwordErrorMessage[j].style.display = 'none'
+    }
+    
 
     const errorMessage = {
         email: 'example@example.com',
@@ -127,6 +142,36 @@
             patternValidation(inputs[i]);
         }
     }
+
+    console.log('here')
+
+    // Password validity: (?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}
+    // regex.test(str)
+
+    function checkPasswordValidity(element){
+        let digRegex = /\d/
+        let alphaLowRegex = /[a-z]/
+        let alphaHiRegex = /[A-Z]/
+        let charCount = /.{8,}/
+
+        // element.addEventListener('focusout', (evt) => {
+        //     console.log(!digRegex.test(element.value))
+        //     if(!digRegex.test(element.value)){
+        //         let p = document.createElement('p');
+        //         p.textContent = 'must include 1 digit';
+        //         element.after(p);
+        //     }
+        // })
+
+        element.addEventListener('focusout', (evt) => {
+            for(let j = 0; j < passwordErrorMessage.length; j++){
+                
+            }
+        })
+    }
+
+    checkPasswordValidity(password);
+
 
 
 </script>
