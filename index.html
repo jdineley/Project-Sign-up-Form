@@ -78,7 +78,7 @@
     const passwordErrorMessage = document.querySelectorAll('.error-message > *')
 
     for(let j = 0; j < passwordErrorMessage.length; j++){
-        console.log('bar')
+    
         passwordErrorMessage[j].style.display = 'none'
     }
     
@@ -101,9 +101,12 @@
                 validityCheck = element.validity.typeMismatch
             }
             if(focusout){
+                console.log('focusout')
                 if(validityCheck && element.value){
                     element.classList.add("input-error")
                     element.classList.remove("input-success")
+                    console.log(element.id)
+
                     p.textContent = errorMessage[element.id];
                 } else if (element.value) {
                     element.classList.remove("input-error")
@@ -124,11 +127,34 @@
             if(validityCheck && element.value){
                 element.classList.add("input-error")
                 element.classList.remove("input-success")
+                if(element.id === 'password'){
+                        for(let j = 0; j < passwordErrorMessage.length; j++){
+                            passwordErrorMessage[j].style.display = 'block';
+                        }
+                        if(/\d/.test(element.value)){
+                            passwordErrorMessage[0].style.display = 'none'
+                        }
+                        if(/[a-z]/.test(element.value)){
+                            passwordErrorMessage[1].style.display = 'none'
+                        }
+                        if(/[A-Z]/.test(element.value)){
+                            passwordErrorMessage[2].style.display = 'none'
+                        }
+                        console.log(/.{8,}/.test(element.value))
+                        if(/.{8,}/.test(element.value)){
+                            passwordErrorMessage[3].style.display = 'none'
+                        }
+                    }
                 p.textContent = errorMessage[element.id];
             } else if(element.value){
                 element.classList.remove("input-error")
                 element.classList.add("input-success")
                 p.textContent = ''
+                if(element.id === 'password'){
+                    if(/.{8,}/.test(element.value)){
+                            passwordErrorMessage[3].style.display = 'none'
+                    }
+                }
             } else {
                 element.classList.remove("input-error")
                 element.classList.remove("input-success")
@@ -143,7 +169,7 @@
         }
     }
 
-    console.log('here')
+   
 
     // Password validity: (?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}
     // regex.test(str)
