@@ -36,7 +36,6 @@
                         <div class="form-row">
                             <label for="email">EMAIL</label>
                             <input type="email" name="email" id="email" placeholder="email *" required>
-                            <!-- <div id="email-error" class="error"></div> -->
                         </div>
                         <div class="form-row">
                             <label for="tel">PHONE NUMBER</label>
@@ -48,13 +47,14 @@
                             <div class="error error-message">
                                 <p id="num-error">must include at least one number</p>
                                 <p id="lowercase-error">must include at least one lowercase letter</p>
-                                <p id="uppercase-error">must include at least one upper letter</p>
-                                <p id="char-length-error">must include 8 character or more</p>
+                                <p id="uppercase-error">must include at least one uppercase letter</p>
+                                <p id="char-length-error">must include 8 characters or more</p>
                             </div>
                         </div>
                         <div class="form-row">
                             <label for="confirm-password">CONFIRM PASSWORD</label>
                             <input type="password" name="confirm-password" id="confirm-password" placeholder="confirm password *" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}' required>
+                            <p id="match-password" class="error">The passwords don't match</p>
                         </div>
                     </div>
                     <div class="button">
@@ -72,7 +72,8 @@
     const inputs = document.querySelectorAll('input');
     const password = document.querySelector('#password');
     const confirmPassword = document.querySelector('#confirm-password');
-    const passwordErrorMessage = document.querySelectorAll('.error-message > *')
+    const passwordErrorMessage = document.querySelectorAll('.error-message > *');
+    const matchPassword = document.querySelector('#match-password');
 
     function inputClassSuccess(element){
         element.classList.remove("input-error")
@@ -91,6 +92,9 @@
 
     function passwordErrorFeedback(element){
         if(element.id === 'password'){
+            for(let j = 0; j < passwordErrorMessage.length; j++){
+                passwordErrorMessage[j].style.display = 'block';
+            }
             if(/\d/.test(element.value)){
                 passwordErrorMessage[0].style.display = 'none'
             }
@@ -106,10 +110,13 @@
         }
     }
 
-    for(let j = 0; j < passwordErrorMessage.length; j++){
-        passwordErrorMessage[j].style.display = 'none'
+    function showPassError(){
+        for(let j = 0; j < passwordErrorMessage.length; j++){
+            passwordErrorMessage[j].style.display = 'block'
+        }
     }
-    
+
+    matchPassword.style.display = 'none';
 
     const errorMessage = {
         email: 'example@example.com',
@@ -131,34 +138,15 @@
             if(focusout){
                 if(validityCheck && element.value){
                     inputClassError(element)
-                    if(element.id === 'password'){
-                        for(let j = 0; j < passwordErrorMessage.length; j++){
-                            passwordErrorMessage[j].style.display = 'block';
-                        }
-                        if(/\d/.test(element.value)){
-                            passwordErrorMessage[0].style.display = 'none'
-                        }
-                        if(/[a-z]/.test(element.value)){
-                            passwordErrorMessage[1].style.display = 'none'
-                        }
-                        if(/[A-Z]/.test(element.value)){
-                            passwordErrorMessage[2].style.display = 'none'
-                        }
-                        if(/.{8,}/.test(element.value)){
-                            passwordErrorMessage[3].style.display = 'none'
-                        }
-                    }
+                    passwordErrorFeedback(element)
                     p.textContent = errorMessage[element.id];
                 } else if (element.value) {
                     inputClassSuccess(element)
                     p.textContent = ''
-                    if(element.id === 'password'){
-                        if(/.{8,}/.test(element.value)){
-                                passwordErrorMessage[3].style.display = 'none'
-                        }
-                    }
+                    passwordErrorFeedback(element);
                 } else {
                     inputClassNeutral(element)
+                    showPassError()
                 }
             }
         })
@@ -170,34 +158,15 @@
             }
             if(validityCheck && element.value){
                 inputClassError(element)
-                if(element.id === 'password'){
-                        for(let j = 0; j < passwordErrorMessage.length; j++){
-                            passwordErrorMessage[j].style.display = 'block';
-                        }
-                        if(/\d/.test(element.value)){
-                            passwordErrorMessage[0].style.display = 'none'
-                        }
-                        if(/[a-z]/.test(element.value)){
-                            passwordErrorMessage[1].style.display = 'none'
-                        }
-                        if(/[A-Z]/.test(element.value)){
-                            passwordErrorMessage[2].style.display = 'none'
-                        }
-                        if(/.{8,}/.test(element.value)){
-                            passwordErrorMessage[3].style.display = 'none'
-                        }
-                    }
+                passwordErrorFeedback(element)
                 p.textContent = errorMessage[element.id];
             } else if(element.value){
                 inputClassSuccess(element)
                 p.textContent = ''
-                if(element.id === 'password'){
-                    if(/.{8,}/.test(element.value)){
-                            passwordErrorMessage[3].style.display = 'none'
-                    }
-                }
+                passwordErrorFeedback(element)
             } else {
                 inputClassNeutral(element);
+                showPassError()
                 p.textContent = ''
             }
         })
@@ -208,14 +177,22 @@
             patternValidation(inputs[i]);
         }
     }
-
-   
-
-    // Password validity: (?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}
-    // regex.test(str)
-
-
-
+    
+    confirmPassword.addEventListener('focusout', (evt) => {
+        if(confirmPassword.value === password.value && confirmPassword.value.length > 0){
+            inputClassSuccess(confirmPassword);
+            matchPassword.style.display = 'none';
+            confirmPassword.setCustomValidity("")
+        } else if(confirmPassword.value.length === 0) {
+            inputClassNeutral(confirmPassword);
+            matchPassword.style.display = 'none';
+            confirmPassword.setCustomValidity("")
+        } else {
+            inputClassError(confirmPassword)
+            matchPassword.style.display = 'block';
+            confirmPassword.setCustomValidity("Invalid field.")
+        }
+    }); 
 
 </script>
 </html>
